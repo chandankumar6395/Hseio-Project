@@ -1,0 +1,142 @@
+ul.list1 li {
+    display: block;
+    border-bottom: solid 1px #e6e6e6;
+}
+ul.list1 li div {
+    display: flex;
+    width: 100%;
+    flex: 1 0;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 15px;
+    color: #292929;
+    cursor: pointer;
+}
+ul.list1 li div:hover {text-decoration: none; background: #e6e6e6;}
+ul.list1 li div:visited {text-decoration: none; background: #e6e6e6;}
+ul.list1 li div svg {
+    width: 12px;
+    height: 12px;
+}
+.font-12 {font-size: 12px!important;}
+.color-white {color: #fff!important;}
+.printhead {padding-bottom: 10px; padding-top: 20px; margin-bottom: 20px;
+    border-bottom:solid .154em #aaa; display: flex; justify-items: center;}
+.printdetail p {text-align: right; margin: 0; line-height: 20px;}
+.categorybox {border-radius: 4px; margin-bottom: 20px; display: table; overflow: hidden;
+    width: 100%; box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1), 2px 2px 5px 0px rgba(0,0,0,0.1);
+border: solid 1px #aaa;background: #fff;}
+.categorybox h6 {background-color: #e6e6e6;font-size: 17px; padding: 8px 15px; margin: 0;}
+.printdetail1 {display: flex; width:100%; margin-bottom: 30px; flex-wrap: wrap;}
+.printdetail1 p {flex:1 1 33%; margin-bottom:10px; padding: 0 6px;}
+.printdetail1 p span {display: block;padding: 6px 10px; border:solid 1px #aaa;height: 35px;}
+.questioncategorybox {border-bottom:solid 1px #ccc;}
+.questioncategorybox:nth-of-type(even) {background:#f6f6f6; }
+.questionbox {display:flex;padding: 8px 15px;flex-direction: column;}
+.questioncategorybox p {padding: 10px 15px; margin-bottom: 0px;}
+.answerbox {flex:2; display: flex;}
+.answeritem {margin-right: 10px;}
+.commentbox {flex:1; padding: 8px; background:#f1f1f1; margin-top: 8px;}
+.answer {display: inline-flex; flex-direction: column; align-items: center;}
+
+@page :left {
+    margin-left: 3cm;
+}
+
+@page :right {
+    margin-left: 4cm;
+}
+@media print {
+    .prt {
+        margin-left: 6em;
+        print-color-adjust: exact;
+    }
+    .categorybox h6 {background-color: #e6e6e6;print-color-adjust: exact;}
+    .commentbox {background:#f1f1f1;print-color-adjust: exact;}
+}
+.que {padding-bottom: 6px; margin-bottom: 7px; border-bottom: solid 1px #eee;}
+h6.or {position: relative; text-align: center; font-size: 18px;height: 24px; display: flex; align-items: center;
+    margin: 20px 0 16px; justify-content: center;}
+.or span {display: inline-block; background-color: #fff;position: absolute;}
+.or::after {display: table; content: " "; height: 1px; border-top:solid 1px #ddd; width: 100%;}
+.catlist ul {padding: 0; margin: 0; display: block;}
+.catlist ul li {display: flex; padding:8px; border-bottom: solid 1px #ddd; align-items: center; justify-content: space-between; flex:0 1; }
+.queslist ul {padding: 0; margin: 0; display: block;}
+.queslist ul li {display: flex; padding:8px; border-bottom: solid 1px #ddd; flex-direction: column; }
+.ans {display: flex; align-items: center; gap:10px;}
+.opt {display: inline-block;}
+.opt span {display: inline-block; padding: 3px 6px; background-color: #f2f6ff; border-radius: 3px; font-size: 12px;}
+.sub {padding: 0px; margin-top: 10px; display: flex; justify-content: flex-end; background: #f9f9f9;}
+.sectitle {padding-bottom: 8px; margin-bottom: 8px; margin-top: 25px; border-bottom:solid 1px #ccc;}
+.adgrp {display:flex; align-items: center;gap: 10px;}
+.adgrp div:nth-child(1){flex:1;}
+.mt-10 {margin-top:10px!important;}
+.applabel {white-space: nowrap;    font-weight: 200;    display: inline-flex;    align-items: center;    margin-bottom: 0; gap:4px; padding: 5px 6px;
+border-radius: 3px; background: #ddeaff; border: solid 1px #c9ddf6; cursor: pointer;
+}
+.cardhead {background: #dff5ff;}
+.queswraper {height:550px; overflow-y: auto;}
+.addqueswraper {min-height:550px;}
+.catwraper {height:236px; overflow-y: auto;}
+.addcatwraper {min-height:236px;}
+.editbtn {
+    /*background-color: #b9e0fd !important;*/
+    padding: 2px !important;
+    color: #005bd1 !important;
+}
+.delbtn {
+    /*background-color: #e3a1a1 !important;*/
+    padding: 2px !important;
+    color: #b72626 !important;
+}
+.alrt {position:fixed; z-index: 5; right: 20px;}
+.cordbox {box-shadow: 0 0 1px rgba(0,0,0,.125),0 1px 3px rgba(0,0,0,.2);
+margin-bottom: 1rem;  position: relative;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    padding: 1.25rem;
+}
+.sho label.btn:nth-child(2) {background: #04c507;}
+.sho label.btn:nth-child(3) {background: #ffa500;}
+.sho label.btn:nth-child(4) {background: #de0d0d;}
+.sho label.btn:nth-child(5) {background: #b62694;}
+.sho label.btn:nth-child(6) {background: #7d9a33;}
+.sho label.btn:nth-child(7) {background: #b92f33;}
+.photoselbox {display:flex; gap:10px;}
+.photoselitembox {display:inline-block; position: relative;}
+.delphotobtn {
+    position: absolute;
+    left: 87px;
+    top: -9px;
+    color: red;
+    font-size: 21px;
+    cursor:pointer;
+}
+.secbox {height: 275px; overflow-y: auto;}
+.signbox {display: flex; text-align: center; margin-top: 50px;}
+.pill1 {display:inline-block; height:20px; line-height: 20px; padding: 0 8px; text-align: center; border-radius: 30px; color:#fff; background: #04c507; font-size: 14px; font-weight:600;}
+.pill2 {display:inline-block; height:20px; line-height: 20px; padding: 0 8px; text-align: center; border-radius: 30px; color:#555; background: #dedede; font-size: 14px; font-weight:600;}
+.photoselbox span img {height: 120px; max-width: 100px;}
+.custonbor {background: #fafafa; box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.1); margin-bottom: 6px; padding:7px;display: flex;
+    gap: 20px;}
+@media (max-width : 768px) {
+    .gridmob6 {width:100%!important;}
+    .secbox {height: auto;}
+    .mobflex1 {width:100%;}
+    .printdetail1 p {flex:1 1 100%;}
+    .categorybox {
+        display: block;
+    }
+    .photoselbox {flex-wrap: nowrap; align-items: center;}
+    .photoselbox span {flex:1;}
+    .photoselbox span img {max-width: 100%; height:auto;}
+}
+.MuiDrawer-paperAnchorLeft {z-index:4!important;}
+.css-1hg6a42-MuiPaper-root-MuiAppBar-root  {z-index:4!important;}
+@media print {
+    .printdetail1 p {flex:1 1 33%;}
+    .google-map-code {display: none;}
+
+}

@@ -1,0 +1,16 @@
+table, th, td {
+    border: 1px solid black;
+    width: 100%;
+}
+
+th, td {
+    padding: 15px;
+    width: 500px;
+}
+th {
+    background-color: #f5f5f2;
+}
+
+span{
+    font-weight: normal;
+}

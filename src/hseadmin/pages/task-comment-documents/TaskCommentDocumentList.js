@@ -1,0 +1,198 @@
+import { Button, Card, Col, Form, Row, Table } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, NavLink } from 'react-router-dom';
+import { loadTaskCommentDocuments } from '../../store/actions/task_comment_documents';
+import CustomPagination from '../../components/CustomPagination';
+
+const TaskCommentDocumentList = () => {
+  const [sort, setSort] = useState('name');
+  const [direction, setDirection] = useState('asc');
+
+  const dispatch = useDispatch();
+
+  const [page, setPage] = useState(1);
+  const [searchText, setSearchText] = useState('');
+
+  useEffect(() => {
+    //  console.log('inside useEffect search text box');
+
+    const timer = setTimeout(async () => {
+      fetchTaskCommentDocuments();
+    }, 400);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [searchText, sort, direction]);
+
+  const taskCommentDocuments = useSelector(
+    (state) => state.taskCommentDocument.taskCommentDocuments
+  );
+  const pagination = useSelector(
+    (state) => state.taskCommentDocument.pagination
+  );
+
+  useEffect(() => {
+    // fetchTrainingEvent();
+  }, []);
+
+  const fetchTaskCommentDocuments = async () => {
+    await dispatch(loadTaskCommentDocuments(1, searchText, sort, direction));
+  };
+
+  const onSearchTextChangeHandler = (event) => {
+    setSearchText(event.target.value);
+  };
+
+  const loadNextPage = async () => {
+    setPage((prevState) => prevState + 1);
+    await dispatch(
+      loadTaskCommentDocuments(page + 1, searchText, sort, direction)
+    );
+  };
+  const loadPrevPage = async () => {
+    setPage((prevState) => prevState - 1);
+    await dispatch(
+      loadTaskCommentDocuments(page - 1, searchText, sort, direction)
+    );
+  };
+
+  const renderTaskCommentDocument = () => {
+    return taskCommentDocuments.map((taskCommentDocument) => {
+      return (
+        <tr key={taskCommentDocument.id}>
+          <td>{taskCommentDocument.task_comment.notes}</td>
+          <td>{taskCommentDocument.document.name}</td>
+          <td>
+            <Link to={`/task-comment-documents/view/${taskCommentDocument.id}`}>
+              <Button
+                variant="dark"
+                size="sm"
+                style={{ marginBottom: '4px', marginRight: '4px' }}
+              >
+                View
+              </Button>
+            </Link>
+            <Link to={`/task-comment-documents/edit/${taskCommentDocument.id}`}>
+              <Button
+                variant="dark"
+                size="sm"
+                style={{ marginBottom: '4px', marginRight: '4px' }}
+              >
+                Edit
+              </Button>
+            </Link>
+          </td>
+        </tr>
+      );
+    });
+  };
+  useEffect(() => {}, [sort, direction]);
+
+  const onArrowClickHandler = (title) => {
+    setSort(title);
+    if (direction === 'asc') {
+      setDirection('desc');
+    } else {
+      setDirection('asc');
+    }
+  };
+  const renderHeaderTitle = (title, sortName) => {
+    let arrow = '';
+
+    if (sort === sortName) {
+      if (direction === 'asc') {
+        arrow = <span>&#8593;</span>;
+      } else {
+        arrow = <span>&#8595;</span>;
+      }
+    } else {
+      arrow = '';
+    }
+    return (
+      <>
+        <>
+          {title}
+          {arrow}
+        </>
+      </>
+    );
+  };
+
+  return (
+    <Row>
+      <Col>
+        <Card>
+          <Card.Header>
+            List of Task Comment Document
+            <NavLink to="/task-comment-documents/add">
+              <Button
+                className="btn-sm"
+                variant="primary"
+                type="button"
+                style={{ float: 'right' }}
+              >
+                Add Task Comment Document
+              </Button>
+            </NavLink>
+          </Card.Header>
+          <Card.Body>
+            <CustomPagination
+              pagination={pagination}
+              loadPrevPage={loadPrevPage}
+              loadNextPage={loadNextPage}
+            />
+
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Control
+                required
+                type="text"
+                placeholder="Search"
+                onChange={onSearchTextChangeHandler}
+              />
+            </Form.Group>
+            <div className="table-responsive">
+              <Table striped bordered hover>
+                <thead>
+                  <tr>
+                    <th>
+                      <span
+                        onClick={() =>
+                          onArrowClickHandler('task_comment.notes')
+                        }
+                        aria-hidden="true"
+                      >
+                        {renderHeaderTitle(
+                          'Task Comment',
+                          'task_comment.notes'
+                        )}
+                      </span>
+                    </th>
+                    <th>
+                      <span
+                        onClick={() => onArrowClickHandler('document.name')}
+                        aria-hidden="true"
+                      >
+                        {renderHeaderTitle('Document', 'document.name')}
+                      </span>
+                    </th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>{renderTaskCommentDocument()}</tbody>
+              </Table>
+            </div>
+            <CustomPagination
+              pagination={pagination}
+              loadPrevPage={loadPrevPage}
+              loadNextPage={loadNextPage}
+            />
+          </Card.Body>
+        </Card>
+      </Col>
+    </Row>
+  );
+};
+
+export default TaskCommentDocumentList;

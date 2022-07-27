@@ -1,0 +1,18 @@
+import * as React from 'react';
+import { Navigate } from 'react-router-dom';
+
+import useAuth from '../../hooks/useAuth';
+
+// For routes that can only be accessed by unauthenticated users
+function GuestGuard({ children }) {
+  const { isAuthenticated, isInitialized } = useAuth();
+
+  if (isInitialized && isAuthenticated) {
+    return <Navigate to="/" />;
+  }
+
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  return <>{children}</>;
+}
+
+export default GuestGuard;
